@@ -4,4 +4,4 @@
 /client/build
 /client/captures
 /client/.idea
-/client/FridgeApp.iml
+/client/*.iml
