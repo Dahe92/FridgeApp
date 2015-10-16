@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FridgeApp</string>
+    <string name="activity_scannerButtonText">Scan Now!</string>
 </resources>
