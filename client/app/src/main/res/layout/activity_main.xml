@@ -11,5 +11,6 @@
         android:layout_height="wrap_content"
         android:text="@string/activity_scannerButtonText"
         android:id="@+id/button"
-        android:onClick="initScan"/>
+        android:onClick="initScan"
+        android:textColor="@android:color/darker_gray" />
 </RelativeLayout>
