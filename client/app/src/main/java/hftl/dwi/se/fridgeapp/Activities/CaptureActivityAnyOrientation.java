@@ -1,4 +1,4 @@
-package hftl.dwi.se.fridgeapp;
+package hftl.dwi.se.fridgeapp.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
