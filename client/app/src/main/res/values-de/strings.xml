@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kühlschrank App</string>
+    <string name="activity_scannerPromptText">Fokusiere den Barcode und halte die Kamera rund 15cm vom Produkt entfernt.</string>
+    <string name="activity_scannerButtonText">Jetzt Scannen!</string>
+</resources>

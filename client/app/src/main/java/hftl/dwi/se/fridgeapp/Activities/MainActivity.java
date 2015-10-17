@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
     }
 
@@ -22,9 +23,7 @@ public class MainActivity extends AppCompatActivity {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setCaptureActivity(CaptureActivityAnyOrientation.class);
         integrator.setOrientationLocked(false);
-        //TODO: set prompt text and add it to strings.xml
-        integrator.setPrompt("AAAAAAAAAAAAAA");
-        integrator.setCameraId(0);  // Use a specific camera of the device
+        integrator.setPrompt(getString(R.string.activity_scannerPromptText));
         integrator.setBeepEnabled(false);
         integrator.setBarcodeImageEnabled(true);
         integrator.initiateScan();
