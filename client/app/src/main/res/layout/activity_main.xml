@@ -4,7 +4,8 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:longClickable="true">
 
     <Button
         android:layout_width="wrap_content"
@@ -19,5 +20,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/listView"
         android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:divider="@android:color/darker_gray"
+        android:longClickable="true"
+        android:background="@drawable/top_border_ui"
+        android:dividerHeight="1dp"
+        android:drawSelectorOnTop="false" />
 </RelativeLayout>

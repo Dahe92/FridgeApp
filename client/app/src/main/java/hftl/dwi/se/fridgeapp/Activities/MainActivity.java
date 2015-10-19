@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listview = (ListView) findViewById(R.id.listView);
 
-        String[] values = new String[]{"Test"};
+        String[] values = new String[]{"Test","Test","Test","Test","Test","Test","Test","Test"};
 
         for (int i = 0; i < values.length; ++i) {
             list.add(values[i]);
@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         //retrieve scan result
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-        ((ArrayAdapter<String>) listview.getAdapter()).add(scanningResult.getContents());
+        if (scanningResult.getContents() != null) {
+            ((ArrayAdapter<String>) listview.getAdapter()).add(scanningResult.getContents());
+        }
     }
 }

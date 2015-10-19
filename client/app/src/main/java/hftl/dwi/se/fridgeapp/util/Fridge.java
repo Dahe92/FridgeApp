@@ -10,9 +10,11 @@ public class Fridge {
 
     private ArrayList<Product> content = new ArrayList<Product>();
     private Date lastSynced;
+    private User user;
 
-    public Fridge(ArrayList<Product> content) {
+    public Fridge(ArrayList<Product> content, User user) {
         this.content = content;
+        this.user = user;
     }
 
     public ArrayList<Product> getContent() {
