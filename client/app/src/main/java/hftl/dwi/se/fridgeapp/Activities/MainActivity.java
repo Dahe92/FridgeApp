@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             list.add(values[i]);
         }
         final ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
+                R.layout.rowlayout,R.id.firstLine,
                 list);
         listview.setAdapter(adapter);
 
