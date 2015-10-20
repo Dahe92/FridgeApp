@@ -13,15 +13,18 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import hftl.dwi.se.fridgeapp.R;
+import hftl.dwi.se.fridgeapp.util.Product;
+import hftl.dwi.se.fridgeapp.util.ProductAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
     ListView listview;
-    final ArrayList<String> list = new ArrayList<String>();
+    final ArrayList<Product> list = new ArrayList<Product>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +32,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listview = (ListView) findViewById(R.id.listView);
 
-        String[] values = new String[]{"Test","Test","Test","Test","Test","Test","Test","Test"};
-
-        for (int i = 0; i < values.length; ++i) {
-            list.add(values[i]);
+        for (int i = 0; i < 7; ++i) {
+            list.add(new Product(123456,"Product#1",new Date(),"Obst","Apfel",new Date(),400,false));
         }
-        final ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,
-                R.layout.rowlayout,R.id.firstLine,
-                list);
+        final ProductAdapter adapter=new ProductAdapter(this, list);
         listview.setAdapter(adapter);
 
 

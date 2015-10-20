@@ -1,60 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight" >
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip">
 
-    <ImageView
-        android:id="@+id/icon"
+    <LinearLayout android:id="@+id/thumbnail_layout"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="6dip"
-        android:contentDescription="TODO"
-        android:src="@drawable/product_pomegranate" />
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip">
 
+        <ImageView
+            android:id="@+id/product_thumbnail"
+            android:layout_width="25dip"
+            android:layout_height="25dip"
+            android:src="@drawable/product_pomegranate"/>
 
-    <LinearLayout
-        android:id="@+id/linLayout"
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="26dip"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/icon">
-
-        <TextView
-            android:id="@+id/secondLine"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:text="Description"
-            android:textSize="12sp"
-            android:layout_weight="0.5" />
-
-        <TextView
-            android:id="@+id/secondLine2"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:text="Description2"
-            android:textSize="12sp"
-            android:layout_weight="0.5"/>
     </LinearLayout>
 
+    <!-- Product Name-->
     <TextView
-        android:id="@+id/firstLine"
+        android:id="@+id/product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/thumbnail_layout"
+        android:layout_toRightOf="@+id/thumbnail_layout"
+        android:text="Descriptor"
+        android:textSize="15dip"
+        android:textStyle="bold"/>
+
+    <!-- Product Amount + unit -->
+    <TextView
+        android:id="@+id/product_amount"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/linLayout"
+        android:layout_below="@id/product_name"
+        android:textSize="10dip"
+        android:layout_marginTop="1dip"
+        android:layout_toRightOf="@+id/thumbnail_layout"
+        android:text="Descriptor" />
+
+    <!-- Rightend MHD -->
+    <TextView
+        android:id="@+id/mhd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_toRightOf="@id/icon"
-        android:gravity="center_vertical"
-        android:text="Example application"
-        android:textSize="16sp" />
+        android:layout_alignTop="@id/product_name"
+        android:gravity="right"
+        android:text="20.12.2015"
+        android:layout_marginRight="5dip"
+        android:textSize="10dip"
+        android:textStyle="bold"/>
+
+    <!-- Rightend Arrow -->
+    <ImageView android:layout_width="10dip"
+        android:layout_height="10dip"
+        android:src="@drawable/detail_arrow"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
 
 </RelativeLayout >
