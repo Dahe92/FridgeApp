@@ -40,8 +40,8 @@ module.exports = function(passport,BasicStrategy,bcrypt) {
 					return done(null, false);
 				}
 				bcrypt.compare(password, user.password, function(err, res) {
-					if (err) { return done(null, false); }
-					return done(null, user);
+					if (err) { return done(err); }
+					return done(null, res);
 				});		
 			});
 		}

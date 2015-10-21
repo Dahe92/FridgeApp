@@ -66,7 +66,8 @@ module.exports = function(app,passport,$,http,bcrypt,User) {
     // =====================================
     // GetEANInfo ==========================
     // =====================================
-    // get info for a product via ean and get
+    // get info for a product via ean and get as json
+	// check for json.error / status to see if successful
 	
 	
 	app.get('/geteaninfo',
@@ -77,7 +78,7 @@ module.exports = function(app,passport,$,http,bcrypt,User) {
 			{
 				var options= {
 					host: 'opengtindb.org',
-					port:80,
+					port: 80,
 					path: '/index.php?cmd=ean1&ean='+req.query.ean+'&sq=1',
 					"user-agent": "Mozilla/5.0"
 				};
