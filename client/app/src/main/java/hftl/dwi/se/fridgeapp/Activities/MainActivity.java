@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         listview = (ListView) findViewById(R.id.listView);
 
         for (int i = 0; i < 7; ++i) {
-            list.add(new Product(123456,"Product#1",new Date(),"Obst","Apfel",new Date(),400,false));
+            list.add(new Product(123456,"Product#1",new Date(),"Obst","Apfel",new Date(),400,"g",false));
         }
         final ProductAdapter adapter=new ProductAdapter(this, list);
         listview.setAdapter(adapter);
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         //retrieve scan result
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanningResult.getContents() != null) {
-            ((ArrayAdapter<String>) listview.getAdapter()).add(scanningResult.getContents());
+            ((ProductAdapter) listview.getAdapter()).add(new Product(Long.valueOf(scanningResult.getContents()),scanningResult.getContents(),new Date(),"Test","Test",new Date(),400,"g",false));
         }
     }
 }

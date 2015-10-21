@@ -41,12 +41,14 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         TextView nameView = (TextView) rowView.findViewById(R.id.product_name);
         TextView amountView = (TextView) rowView.findViewById(R.id.product_amount);
         TextView mhdView = (TextView) rowView.findViewById(R.id.mhd);
+        TextView unitView = (TextView) rowView.findViewById(R.id.product_unit);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.product_thumbnail);
 
         // 4. Set the text for textView
         nameView.setText(itemsArrayList.get(position).getName());
         amountView.setText(Integer.toString(itemsArrayList.get(position).getAmount()));
         mhdView.setText(itemsArrayList.get(position).getMhd().toString());
+        unitView.setText(itemsArrayList.get(position).getUnit());
 
         // 5. retrn rowView
         return rowView;

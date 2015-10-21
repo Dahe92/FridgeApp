@@ -3,7 +3,12 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dip">
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
+
+
 
     <LinearLayout android:id="@+id/thumbnail_layout"
         android:layout_width="wrap_content"
@@ -31,15 +36,27 @@
         android:textSize="15dip"
         android:textStyle="bold"/>
 
-    <!-- Product Amount + unit -->
+    <!-- Product Amount -->
     <TextView
         android:id="@+id/product_amount"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/product_name"
         android:textSize="10dip"
         android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/thumbnail_layout"
+        android:text="Descriptor" />
+
+    <!-- Product amount unit -->
+    <TextView
+        android:id="@+id/product_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_name"
+        android:textSize="10dip"
+        android:layout_marginTop="1dip"
+        android:layout_marginLeft="2dip"
+        android:layout_toRightOf="@+id/product_amount"
         android:text="Descriptor" />
 
     <!-- Rightend MHD -->

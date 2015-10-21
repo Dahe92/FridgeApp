@@ -45,10 +45,11 @@ public class Product{
     private String tag;
     private Date buyDate;
     private int amount;
+    private String unit;
     //is this specific product usable in statistics
     private boolean isInfluencingStatista;
 
-    public Product(long eanId, String name, Date mhd, String category, String tag, Date buyDate, int amount, boolean isInfluencingStatista) {
+    public Product(long eanId, String name, Date mhd, String category, String tag, Date buyDate, int amount,String unit, boolean isInfluencingStatista) {
         this.eanId = eanId;
         this.name = name;
         this.mhd = mhd;
@@ -56,6 +57,7 @@ public class Product{
         this.tag = tag;
         this.buyDate = buyDate;
         this.amount = amount;
+        this.unit=unit;
         this.isInfluencingStatista = isInfluencingStatista;
     }
 
@@ -121,6 +123,14 @@ public class Product{
 
     public void setIsInfluencingStatista(boolean isInfluencingStatista) {
         this.isInfluencingStatista = isInfluencingStatista;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     @Override
