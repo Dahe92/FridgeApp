@@ -2,16 +2,16 @@
   "name": "fridgeApp",
   "main": "server.js",
   "dependencies" : {
-    "express" : "~4.0.0",           
-    "mongoose" : ">= 0.0.0",          
-    "passport" : ">= 0.0.0",         
-    "passport-http" : ">= 0.0.0", 
-    "bcrypt" : ">= 0.0.0",
-    "jquery":">= 0.0.0",
-    "jsdom-no-contextify" : ">= 0.0.0",
-    "morgan": "~1.0.0",
-    "body-parser": "~1.0.0",
-    "cookie-parser": "~1.0.0",
-    "express-session": "~1.0.0"
+    "express" 				: "~4.0.0",           
+    "mongoose" 				: ">= 0.0.0", 
+	"datejs"				: ">= 0.0.0",
+    "passport" 				: ">= 0.0.0",         
+    "passport-http" 		: ">= 0.0.0", 
+    "bcrypt" 				: ">= 0.0.0",
+    "jquery"				: ">= 0.0.0",
+    "jsdom-no-contextify" 	: ">= 0.0.0",
+    "morgan"				: "~1.0.0",
+    "body-parser"			: "~1.0.0",
+    "express-session"		: "~1.0.0"
   }
 }

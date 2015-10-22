@@ -3,7 +3,7 @@
 
 
 
-module.exports = function(app,passport,$,http,bcrypt,User) {
+module.exports = function(app,passport,$,http,bcrypt,User,Product,Fridge,FridgeContent,Withdrawel,Reports) {
 
     // =====================================
     // HOME PAGE (with login links) ========
@@ -18,47 +18,58 @@ module.exports = function(app,passport,$,http,bcrypt,User) {
     // =====================================
     // register a user via post
 	
-	app.post('/postsignup',function(req,res){
+	app.post('/postsignup',function postSignup(req,res){
 		User.findOne({ username :  req.body.username },
-		function(err, user) {
+		function UserfindOne(err, user) {
 			// if there are any errors, return the error
 			if (err) {
-				return handleError(err);
 				res.status(500).json({message: "Error during DB search"});
+				return;
 			}
+
 			// check to see if theres already a user with that username
 			if (user) {
-				res.status(400).json({message: "There already is user with that username"});
+				res.status(400).json({message: "There already is a user with that username"});
+				return;
 			} 
-			else{
 
-				// if there is no user with that email
-				// create the user
-				var newUser            = new User();
 
-				// set the user's local credentials
-				newUser.username    = req.body.username;
-				var hash = bcrypt.hash(req.body.password, 10, function(err, hash){
-					if (hash.length>13){
-						newUser.password = hash;
-						// save the user
-						newUser.save(function(err) {
-							if (err){ 
-								return handleError(err);
-								res.status(500).json({message: "Error during hashing"})
-							}
-							res.status(200).json({message :"User signed up"});
-						});
-					}
-					else{
-						res.status(500).json({message: "Error during hashing"})
-					}
+			// if there is no user with that email
+			// create the user
+			var newUser            = new User();
+
+			// set the user's local credentials
+			newUser.username    = req.body.username;
+			var hash = bcrypt.hash(req.body.password, 10, function hashingPW(err, hash){
+				if (hash.length<=13){
+					res.status(500).json({message: "Error during hashing"})
+					return;
+				}
+
+				newUser.password = hash;
+				// save the user
+				newUser.save(function saveNewUser(err,user) {
+					if (err){ 
+						res.status(500).json({message: "Error during saving user"});
+						return;
+					}						
 					
-
+					var newFridge = new Fridge();
+					
+					console.log(user);
+					newFridge.owner = user.username;
+					newFridge.name  = "1";
+					
+					newFridge.save(function saveNewFridge(err,fridge){
+						if (err){ 
+							res.status(500).json({message: "Error during saving fridge"});
+							return;
+						}	
+						res.status(200).json({message :"User signed up"});
+					});
 				});
 
-			}
-
+			});			
 		});
 	});    
     
@@ -71,36 +82,69 @@ module.exports = function(app,passport,$,http,bcrypt,User) {
 	
 	
 	app.get('/geteaninfo',
+		//if (req.secure) use for ssl check
 		passport.authenticate('basic', {session:false}),
 		function(req,res){
-
-			if(req.query.ean!= undefined && req.query.ean!="")
+			var reqEan = req.query.ean;
+			if(reqEan!= undefined && reqEan!="")
 			{
-				var options= {
-					host: 'opengtindb.org',
-					port: 80,
-					path: '/index.php?cmd=ean1&ean='+req.query.ean+'&sq=1',
-					"user-agent": "Mozilla/5.0"
-				};
+				Product.findOne({ ean :  reqEan },
+				function findProduct(err,product){
+					if(err){
+						res.status(500).json({message: "Error during DB search"});
+						return;
+					}
+					else{
+						if(product){
+							res.status(200).json(product);
+						}
+						else{
+							var options= {
+								host: 'opengtindb.org',
+								port: 80,
+								path: '/index.php?cmd=ean1&ean='+reqEan+'&sq=1',
+								"user-agent": "Mozilla/5.0"
+							};
 
-				var html='';
-				http.get(options, function(resp){
-					resp.setEncoding('binary');
-					resp.on('data', function(data) {
-						// collect the data chunks to the variable named "html"
-						html += data;
-					}).on('end', function() {
-						// the whole of webpage data has been collected. parsing time!
-						var prodName = $(html).find('b:contains("Detailname:")').parent().parent().find(':nth-child(2)').text().trim()
-						var prodCat = $(html).find('b:contains("Unterkategorie:")').parent().parent().find(':nth-child(2)').text().trim()
-						var prodTag = $(html).find('b:contains("Name:")').parent().parent().find(':nth-child(2)').text().trim()
-						var productDoc={_id : req.query.ean,name :prodName,mhd:[],category:prodCat,tag :prodTag,unit:"" };
-						res.set({
-							"Content-Type": "application/json; charset=utf-8",
-							"Connection" : "close"
-						});
-						res.json(productDoc);
-					});
+							var html='';
+							http.get(options, function(resp){
+								resp.setEncoding('binary');
+								resp.on('data', function(data) {
+									// collect the data chunks to the variable named "html"
+									html += data;
+								}).on('end', function() {
+									// the whole of webpage data has been collected. parsing time!
+									var prodName = $(html).find('b:contains("Detailname:")').parent().parent().find(':nth-child(2)').text().trim()
+									var prodCat = $(html).find('b:contains("Unterkategorie:")').parent().parent().find(':nth-child(2)').text().trim()
+									var prodTag = $(html).find('b:contains("Name:")').parent().parent().find(':nth-child(2)').text().trim()
+									
+									var newProduct = new Product();
+									
+									newProduct.ean  	= reqEan;
+									newProduct.name 	= prodName;
+									newProduct.mhd		= [];
+									newProduct.category = prodCat.length>=2?prodCat:""; // check if product category exists if not keep empty
+									newProduct.tag		= prodTag.length>=2?prodTag:"";
+									newProduct.unit		= "";
+									
+									newProduct.save(function(err,product) {
+										if (err){ 
+											res.set({
+												"Content-Type": "application/json; charset=utf-8",
+												"Connection" : "close"
+											});										
+											res.status(500).json({message: "Error during saving new Product"})
+											return;
+										}
+										res.status(200).json(product);
+									});
+								});
+							});
+							
+						}
+						
+					}
+				
 				});
 			}
 			else
